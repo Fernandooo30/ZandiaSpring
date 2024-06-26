@@ -1,10 +1,15 @@
 package com.example.pizandia.entidades;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Cliente")
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cliente {
 
     @Id
@@ -14,7 +19,7 @@ public class Cliente {
     private String nombre;
     private String apellido;
 
-    @Column(name = "email_contraseña", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     private String direccion;
@@ -22,9 +27,7 @@ public class Cliente {
 
     private String contraseña;
 
-    // Constructor vacío (necesario para JPA)
-    public Cliente() {
-    }
+    private String roles; // Añadimos roles para Spring Security
 
     // Getters y Setters para todos los campos
     public Long getClienteId() {
@@ -81,5 +84,13 @@ public class Cliente {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }
